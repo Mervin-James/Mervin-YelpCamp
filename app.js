@@ -50,7 +50,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));  //uses static assets from "/public" folder
 app.use(mongoSanitize());       //implements basic security measures
 
-const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+const secret = process.env.SECRET || 'h3js7d42kcts42dqq7g';
 const store = new MongoDBStore({        //using MongDBStore to store information
     url: dbUrl,
     secret,
@@ -169,6 +169,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err }); //renders error.ejs inside views>error.ejs
 });
 
-app.listen(3000, () => {
-    console.log("Serving on port 3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`);
 });
