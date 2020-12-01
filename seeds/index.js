@@ -3,11 +3,12 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const mongoose = require('mongoose');
-// The following have been stored in 'module.exports' in their respective files
+
 const cities = require('./cities')
 const Campground = require('../models/campground');
-const { descriptors, places } = require('./seedHelpers')
-//END
+const { descriptors, places } = require('./seedHelpers');
+const { firstNames, lastNames } = require('./names')
+const User = require('../models/user');
 
 const dbURL = process.env.DB_URL;
 
@@ -27,11 +28,38 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
+    await User.deleteMany({});
+
+    let alreadyUsedNames = [];
+
     for (let i = 0; i < 300; i++) {
+        let randomFirstName = 0;
+        let randomLastName = 0;
+
+        do {
+            randomFirstName = Math.floor(Math.random() * 200);
+            randomLastName = Math.floor(Math.random() * 100);
+            const namePair = `${randomFirstName}${randomLastName}`
+            if (!alreadyUsedNames.includes(namePair)) {
+                alreadyUsedNames.push(namePair);
+                break;
+            }
+        } while (true);
+
+
+
+
+        const user = new User({
+            email: `testAlpha${i}@g.com`,
+            username: `${firstNames[randomFirstName]} ${lastNames[randomLastName]}`
+        })
+        await user.save();
+
+
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
-            author: '5fbc204cd661170303af1dc9',
+            author: user._id,
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odit, enim aliquam, totam debitis, facilis nemo nam molestias soluta tenetur voluptate aliquid sed ut. Maiores animi neque architecto illum laboriosam!",

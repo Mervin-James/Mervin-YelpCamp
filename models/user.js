@@ -7,7 +7,9 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-    }
+    },
+    username: String,       //not unique at the moment
+
 });
 
 //adds the username (hash and salt field) and hased password (and salt value) to UserSchema

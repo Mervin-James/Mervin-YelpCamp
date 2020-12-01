@@ -6,12 +6,30 @@ const { cloudinary } = require("../cloudinary");
 
 
 module.exports.index = async (req, res) => {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds })
+    const mapCampgrounds = await Campground.find({}).populate("popUpText");
+    const perPage = 8;
+    const pageQuery = parseInt(req.query.page);
+    const pageNumber = pageQuery ? pageQuery : 1;
+    Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+        Campground.countDocuments().exec(function (err, count) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("campgrounds/index", {
+                    mapCampgrounds,
+                    campgrounds: allCampgrounds,
+                    current: pageNumber,
+                    pages: Math.ceil(count / perPage)
+                });
+            }
+        });
+    });
+
+    // res.render('campgrounds/index', { campgrounds })
 }
 
 module.exports.renderNewForm = (req, res) => {         //dont need async function b/c we aren't waiting for data from database
-    res.render('campgrounds/new')
+    res.render('campgrounds/new');
 }
 
 module.exports.createCampground = async (req, res, next) => {
