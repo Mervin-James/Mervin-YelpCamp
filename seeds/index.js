@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const cities = require('./cities')
 const Campground = require('../models/campground');
-const { descriptors, places } = require('./seedHelpers');
+const { descriptors, places, campImages } = require('./seedHelpers');
 const { firstNames, lastNames } = require('./names')
 const User = require('../models/user');
 
@@ -55,6 +55,35 @@ const seedDB = async () => {
         })
         await user.save();
 
+        // assigning campground images
+        const images = [];
+        let rand1 = 0;
+        let rand2 = 0;
+        let rand3 = 0;
+        do {
+            rand1 = Math.floor(Math.random() * 24);
+            rand2 = Math.floor(Math.random() * 24);
+            rand3 = Math.floor(Math.random() * 24);
+        } while (rand1 === rand2 || rand2 === rand3);
+
+        const image1 = {
+            url: campImages[rand1],
+            fileName: campImages[rand1].substring(62)
+        }
+        const image2 = {
+            url: campImages[rand2],
+            fileName: campImages[rand2].substring(62)
+        }
+        images.push(image1);
+        images.push(image2);
+
+        if (Math.random() > 0.5) {
+            const image3 = {
+                url: campImages[rand3],
+                fileName: campImages[rand3].substring(62)
+            }
+            images.push(image3);
+        }
 
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
@@ -71,16 +100,7 @@ const seedDB = async () => {
                     cities[random1000].latitude
                 ]
             },
-            images: [
-                {
-                    url: 'https://res.cloudinary.com/diil8j2cv/image/upload/v1606347203/YelpCamp/uhwnxapvy5hcjme9tlht.jpg',
-                    filename: "YelpCamp/uhwnxapvy5hcjme9tlht"
-                },
-                {
-                    url: "https://res.cloudinary.com/diil8j2cv/image/upload/v1606346754/YelpCamp/noavf6jilbfz6wvolqo4.jpg",
-                    filename: "YelpCamp/noavf6jilbfz6wvolqo4"
-                }
-            ]
+            images,
         })
         await camp.save();
     }
