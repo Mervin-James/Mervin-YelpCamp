@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const mongoose = require('mongoose');
 // The following have been stored in 'module.exports' in their respective files
 const cities = require('./cities')
@@ -5,7 +9,9 @@ const Campground = require('../models/campground');
 const { descriptors, places } = require('./seedHelpers')
 //END
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const dbURL = process.env.DB_URL;
+
+mongoose.connect(dbURL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
