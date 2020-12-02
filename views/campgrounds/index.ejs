@@ -4,23 +4,16 @@
 
 <h1>All Campgrounds</h1>
 
-<div>
-    <a href="/campgrounds/new">Add Campground</a>
-</div>
-
-<ul>
-    <% for(let campground of campgrounds) { %>
-    <div class="card mb-3">
-        <div class="row">
-            <div class="col-md-4">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <% for(let campground of campgrounds) { %>
+        <div class="col">
+            <div class="card">
                 <% if(campground.images.length) { %>
-                <img class="img-fluid" alt="" src="<%= campground.images[0].url %>">
+                <img class="card-img-top" alt="" src="<%= campground.images[0].url%>">
                 <% } else { %>
-                <img class="img-fluid" alt=""
-                    src="https://res.cloudinary.com/diil8j2cv/image/upload/v1606416130/YelpCamp/eubjr6tvjnwluukifugx.jpg">
+                <img class="card-img-top" alt=""
+                    src="https://res.cloudinary.com/diil8j2cv/image/upload/v1606794784/YelpCamp/annie-spratt-OxTT6kZs_gU-unsplash_hberkj.jpg">
                 <% } %>
-            </div>
-            <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><%= campground.title %></h5>
                     <p class="card-text"><%= campground.description %></p>
@@ -32,10 +25,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <% } %>
-</ul>
-
+        <% } %>
+</div>
+<div class="mb-3"></div>
 <nav aria-label="Page navigation">
     <% if (pages && pages > 0) { %>
     <ul class="pagination justify-content-center">
