@@ -5,27 +5,30 @@
 <h1>All Campgrounds</h1>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <% for(let campground of campgrounds) { %>
-        <div class="col">
-            <div class="card">
-                <% if(campground.images.length) { %>
-                <img class="card-img-top" alt="" src="<%= campground.images[0].url%>">
-                <% } else { %>
-                <img class="card-img-top" alt=""
-                    src="https://res.cloudinary.com/diil8j2cv/image/upload/v1606794784/YelpCamp/annie-spratt-OxTT6kZs_gU-unsplash_hberkj.jpg">
-                <% } %>
-                <div class="card-body">
-                    <h5 class="card-title"><%= campground.title %></h5>
-                    <p class="card-text"><%= campground.description %></p>
-                    <p class="card-text">
-                        <small class="text-muted"><%= campground.location %></small>
-                    </p>
+    <% for(let campground of campgrounds) { %>
+    <div class="col">
+        <div class="card">
+            <% if(campground.images.length) { %>
+            <img class="card-img-top" alt="" src="<%= campground.images[0].url%>">
+            <% } else { %>
+            <img class="card-img-top" alt=""
+                src="https://res.cloudinary.com/diil8j2cv/image/upload/v1606794784/YelpCamp/annie-spratt-OxTT6kZs_gU-unsplash_hberkj.jpg">
+            <% } %>
+            <div class="card-body">
+                <h5 class="card-title"><%= campground.title %></h5>
+                <p class="card-text"><%= campground.description %></p>
+                <p class="card-text">
+                    <small class="text-muted"><%= campground.location %></small>
+                </p>
+                <div class="row align-items-center">
                     <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View
                         <%= campground.title %></a>
                 </div>
+
             </div>
         </div>
-        <% } %>
+    </div>
+    <% } %>
 </div>
 <div class="mb-3"></div>
 <nav aria-label="Page navigation">

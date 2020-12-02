@@ -1,0 +1,29 @@
+body {
+    background-color: #ffeed025;
+}
+
+h1 {
+    text-align: center;
+    border: 0.3rem;
+    margin: 1.5rem
+}
+
+.card {
+    /* background-color: #ffeed010; */
+    border-radius: 0.25rem;
+    /* border-color: #001f52; */
+}
+
+.btn {
+    background-color: #001f52f2;
+    /* color: #ffeed0; */
+}
+
+.pagination a {
+    color: #001f52;
+}
+
+.navbar, .footer {
+    background-color: #001f52;
+}
+

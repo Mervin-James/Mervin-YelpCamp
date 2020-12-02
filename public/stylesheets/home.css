@@ -9,40 +9,43 @@ body {
 
     /* font-family: "Nunito", sans-serif; */
     /* font-family: 'Montserrat', sans-serif; */
-    
-}
-
-h1 {
-    
+    color: #ffeed0
 }
 
 .lead {
     font-weight: 300;
+    
 }
 
 .cover-container {
     max-width: 60vw;
+    color: #ffeed0;
+
 }
 
 .nav-link {
     padding: 0.25rem 0;
     font-weight: 700;
-    color: rgba(255,255,255,0.5);
+    color: #ffeed050;
     margin-left: 1rem;
     border-bottom: 0.25rem solid transparent;
 }
 
 .nav-link:hover{
-    color: rgba(255,255,255,0.5);
-    border-bottom-color:rgba(255,255,255,0.5);
+    color: #ffeed050;
+    border-bottom-color: #ffeed050;
 }
 
 .btn-secondary, .btn-secondary:hover{
-    color: #333;
+    color: #001f52;
     text-shadow: none;
+    background-color: #ffeed0;
+    font-weight: 400;
+    /* font-family: 'Nunito', sans-serif; */
+
 }
 
 .nav-link.active {
-    color: white;
-    border-bottom-color:white;
+    color: #ffeed0;
+    border-bottom-color:#ffeed0;
 }
