@@ -1,6 +1,6 @@
 # Mervin-YelpCamp
 A Yelp-inspired application for Campgrounds. 
-Built and deployed Node application for sharing campgrounds and
+A Node application for sharing campgrounds and
 reviews.
 Implemented CRUD and geoJSON
 features with Express, MongoDB, and Passport.
